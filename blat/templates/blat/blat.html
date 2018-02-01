@@ -1,0 +1,21 @@
+{% extends 'blat/base.html' %}
+{% block title %} Main Page {% endblock %}
+{% block content %}
+{% load humanize %}
+{% if blat_list %}
+<dl>
+{% for blat in blat_list %}
+<dt> {{ blat.text }} </dt>
+<dd> <a href="{% url 'detail' blat.id %}">{{ blat.created_on|naturaltime }} </a> @{{blat.created_by}} </dd>
+	{% if blat.via %}
+	<a href="{{ blat.via }}"> /Via </a>
+	{% endif %}
+	{% if blat.created_by == user %}
+	<a href="{% url 'editblat' blat.id %}"> Edit This </a>
+	{% endif %}
+{% endfor %}
+</dl>
+{% else %}
+:-(
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> {% block title %} {% endblock %} </title>
+</head>
+<body>
+	
+<div class="header"> 
+<h1><a href="{% url 'home' %}"> Blather App </a> </h1>
+</div>
+	<ul>
+		{% if user.is_authenticated %}
+		<li> Logged in as:{{user}}.<b>{{user.profile.bio}}</b>
+			{%if user.profile.blog %}<a href="{{user.profile.blog}}">Blog</a>
+			{% endif %}
+		</li>
+
+		<li> <a href="{% url 'myview' %}"> My View </a> </li>
+		<li> <a href="{% url 'logout' %}?next=/"> Logout </a> </li>
+		{% else %}
+		<li> <a href="/login/?next=/">Log in </a></li>
+		{% endif %}
+	</ul>
+{% block content %}
+{% endblock content %}
+</body>
+</html>

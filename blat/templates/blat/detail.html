@@ -1,0 +1,10 @@
+{% extends 'blat/base.html' %}
+{% block title %} {{ blat.text }} {% endblock %}
+{% block content %}
+{{ blat.text }}
+{{blat.created_on}}
+{% if blat.via %}
+<a href="{{ blat.via }}"> /Via </a>
+{% endif %}
+
+{% endblock content %}
