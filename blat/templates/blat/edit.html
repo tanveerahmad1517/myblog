@@ -1,0 +1,24 @@
+{% extends "blat/base.html" %}
+{% block title %} Create New Post {% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+ <div class="container" >
+	<form action="" method="post">
+	
+		  <div class="row">
+		   <div class="input-field col s12">
+		   	{% render_field form.title %}
+		   	<label for="title"> Title </label>
+		   </div>
+		   <div class="input-field col s12">
+		   {% render_field form.text|add_class:'materialize-textarea'  %}
+		   <label for="title"> Text </label>
+         
+          </div>
+        </div>
+		<button class="no-border" type="submit"> <a class="waves-effect waves-light btn-large">Submit</a></button>
+		{% csrf_token %}
+	</form>
+ </div><!-- container -->
+  </div> <!-- row -->
+{% endblock content %}

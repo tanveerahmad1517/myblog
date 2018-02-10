@@ -1,10 +1,51 @@
 {% extends 'blat/base.html' %}
-{% block title %} {{ blat.text }} {% endblock %}
+{% block title %} {{ blat.title }} {% endblock %}
+{% load humanize %}
 {% block content %}
-{{ blat.text }}
-{{blat.created_on}}
-{% if blat.via %}
-<a href="{{ blat.via }}"> /Via </a>
-{% endif %}
 
-{% endblock content %}
+
+
+	<div class="divider"> </div>
+ 	 <div class="container">       
+ 	  <div class="row">
+		<div class="section">
+ 		 <div class="col s3">
+    		<blockquote>
+   					<p >{{blat.created_on}} </p>
+   			</blockquote>
+ 		 </div> <!-- col -->
+		<div class="col s3">
+        		 			Added By | <b> {{blat.created_by}} </b>
+		</div> <!-- col -->
+         					{% if blat.created_by == user %}
+ 	 	<div class="col s1">    
+	 				<a href="{% url 'editblat' blat.id %}" class="btn-floating btn-small waves-effect waves-light red">
+              			<i class="large material-icons">mode_edit</i>
+             		</a>
+        </div>
+            <div class="col s1"> 
+             		<a href="{% url 'delete' blat.id %}" class="btn-floating btn-small waves-effect waves-light red">
+             		<i class="material-icons delete_forever">delete</i></a>
+            </div>
+ 							{% endif %}
+
+   	</div>
+  </div>
+		<h4>  {{ blat.title}} </a> </h4>
+  	</div>
+  </div>
+  <div class="divider">
+  	
+  </div> <!-- divider -->
+
+  <div class="container">
+  	<div class="row">
+		 	<p> {{ blat.text }} </p>
+  	</div>
+  </div>
+
+  	<br><br>
+
+					{% endblock content %}
+
+		

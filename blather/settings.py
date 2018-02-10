@@ -2,6 +2,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'blat/templates/blat')
 
 
 # Quick-start development settings - unsuitable for production
@@ -14,7 +15,7 @@ SECRET_KEY = 'q-y@d8f0j#5#mb1sud61ert+db$(g^0^ar6@0mpm9$b@1wvam='
 DEBUG = True
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     'blat', 
     'django.contrib.humanize',
     'debug_toolbar',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -72,10 +74,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-import dj_database_url
-db_from_env = db_database_url.config(conn_max_agg=500)
-DATABASES['default'].update(db_from_env)
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 
 # Password validation
@@ -125,12 +124,4 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-def show_toolbar(request):
-    return True
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
-}
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static'),

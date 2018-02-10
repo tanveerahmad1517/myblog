@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Blat(models.Model):
+	title = models.CharField(max_length=200)
 	text = models.TextField()
 	created_on = models.DateTimeField(auto_now_add=True)
-	via = models.URLField(blank=True)
 	created_by= models.ForeignKey(User, on_delete=models.CASCADE)
 	def __unicode__(self):
 		return self.text[:500]

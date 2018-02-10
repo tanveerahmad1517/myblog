@@ -1,27 +1,72 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title> {% block title %} {% endblock %} </title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
-	
-<div class="header"> 
-<h1><a href="{% url 'home' %}"> Blather App </a> </h1>
-</div>
-	<ul>
-		{% if user.is_authenticated %}
-		<li> Logged in as:{{user}}.<b>{{user.profile.bio}}</b>
-			{%if user.profile.blog %}<a href="{{user.profile.blog}}">Blog</a>
-			{% endif %}
-		</li>
 
-		<li> <a href="{% url 'myview' %}"> My View </a> </li>
-		<li> <a href="{% url 'logout' %}?next=/"> Logout </a> </li>
-		{% else %}
-		<li> <a href="/login/?next=/">Log in </a></li>
-		{% endif %}
-	</ul>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="{% url 'home' %}" class="brand-logo">My App</a>
+      <ul class="right hide-on-med-and-down">
+       {% if user.is_authenticated %}
+        	<li><a href="{% url 'user_info'  %}"> {{user}} </a></li>
+        	<li><a href="{% url 'newblat'%}">Create Post</a></li>
+        	<li><a href="{% url 'myview' %}"> My View </a> </li>
+        	<li><a href="{% url 'home' %}">Home</a></li>
+        	<li><a href="{% url 'logout' %}?next=/"> Logout </a></li>        	
+       {% else %}
+       		<li> <a href="/login/?next=/">Log in </a></li>
+       {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+       {% if user.is_authenticated %}
+        	<li><a href="#">:{{user}}</a></li>
+        	<li><a href="{% url 'myview' %}"> My View </a> </li>
+        	<li><a href="{% url 'home' %}">Home</a></li>
+        	<li><a href="{% url 'logout' %}?next=/"> Logout </a></li>
+        	
+       {% else %}
+       		<li> <a href="/login/?next=/">Log in </a></li>
+       {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  
+
+
 {% block content %}
 {% endblock content %}
+
+
+{% block footer %}
+<footer class="light-blue lighten-1" role="navigation">
+<div class="footer-copyright">
+      <div class="container">
+      Made by <span class="#f57f17 yellow darken-4"> <a href="{% url 'user_info' %}">{{user}} </a></span>
+      </div>
+    </div>
+</footer>
+{% endblock footer %}
+
+
+
+
+ <!--  Scripts-->
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
 </body>
 </html>
