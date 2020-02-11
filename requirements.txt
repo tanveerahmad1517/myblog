@@ -3,7 +3,7 @@ bcrypt==3.1.4
 certifi==2018.1.18
 cffi==1.11.4
 chardet==3.0.4
-Django==2.0
+Django==2.2.10
 django-debug-toolbar==1.9.1
 django-widget-tweaks==1.4.1
 Faker==0.8.10
